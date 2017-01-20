@@ -1,0 +1,17 @@
+shell -$SHELL
+startup_message off
+vbell off
+defscrollback 8000
+caption always "%{= kw}%-Lw%{= Gk}%n*%f %t%{-}%+Lw %-= %c %d.%m.%Y"
+hardstatus string "%H %n"
+bindkey "^[[5D" prev
+bindkey "^[[5C" next
+bindkey -m "^K" eval copy "stuff ^b"             # move up one page
+#bindkey -m "^[[A" stuff k               # move up one line
+#bindkey "^N" screen - interferes with vim completion
+termcapinfo xterm|xterms|xs|rxvt ti@:te@
+screen bash #-l
+screen bash #-l
+screen bash #-l
+select 0
+
