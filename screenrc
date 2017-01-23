@@ -1,4 +1,4 @@
-shell -$SHELL
+shell $SHELL
 startup_message off
 vbell off
 defscrollback 8000
@@ -10,8 +10,7 @@ bindkey -m "^K" eval copy "stuff ^b"             # move up one page
 #bindkey -m "^[[A" stuff k               # move up one line
 #bindkey "^N" screen - interferes with vim completion
 termcapinfo xterm|xterms|xs|rxvt ti@:te@
-screen bash #-l
-screen bash #-l
-screen bash #-l
+screen bash
+screen bash
+screen bash
 select 0
-
