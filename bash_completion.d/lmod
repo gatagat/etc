@@ -1,0 +1,49 @@
+#!/bin/bash
+#
+# bash completion for lmod
+#
+
+
+_lmod()
+{
+    local cur prev opts
+
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+    opts='help add load try-load try-add del rm unload swap sw switch purge \
+          list avail spider whatis keyword key save restore savelist reset \
+          getdefault setdefault record show use unuse tablelist'
+
+    if [[ ${COMP_CWORD} -eq 1 ]]; then
+        COMPREPLY=( $(compgen -W "$(echo ${opts}|sort -u)" -- ${cur}) )
+        return 0
+    fi
+
+    case "${prev}" in
+        load|show)
+            _lmod_load
+            return 0
+            ;;
+        unload|rm|del)
+            _lmod_unload
+            return 0
+            ;;
+    esac
+}
+
+_lmod_load()
+{
+    local opts
+    opts="$(module avail 2>&1 | grep -v '^---' | head --lines=-9 | sed -e 's/([DLS])//g')"
+    COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+}
+
+_lmod_unload()
+{
+    local opts
+    opts="$(module list 2>&1 | head --lines=-4 | tail --lines=+3 | sed -e 's/[0-9]*)//g' -e 's/([DLS])//g')"
+    COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+}
+
+complete -F _lmod module
+complete -F _lmod ml

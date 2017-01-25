@@ -17,7 +17,7 @@ fi
 log_profile "Module cleanup done"
 
 # Setup EasyBuild
-log_profile "Setup eb"
+log_profile "Setup eb modules"
 if [ -e /biosw/debian7-x86_64/easybuild/setup-eb.sh ]; then
     #source /biosw/debian7-x86_64/easybuild/setup-eb.sh
 export EASYBUILD_MODULES_TOOL=Lmod
@@ -44,10 +44,8 @@ module unuse /biosw/modules/modulefiles/msa
 module unuse /biosw/modules/modulefiles/multimedia /biosw/modules/modulefiles/ngs
 module unuse /biosw/modules/modulefiles/structure_md
 
-log_profile "load eb"
-module load EasyBuild
 fi
-log_profile "Setup eb done"
+log_profile "Setup eb modules done"
 
 # Matlab should not clutter my HOME!
 export MATLAB_LOG_DIR=/tmp
