@@ -4,6 +4,7 @@ function log_bashrc ()
 }
 
 log_bashrc "Start"
+uname=$(uname)
 
 # Please do shut up if non-interactive, also if `ssh host /bin/true`, or
 # `git clone`, ...
@@ -12,13 +13,32 @@ if [[ "$-" != *i* ]]; then
 	return
 fi
 
+if [ "$uname" == "Darwin" ]; then
+	export LC_CTYPE=en_US.UTF-8
+	export EDITOR=/opt/local/bin/vim
+fi
+
 log_bashrc "Setting aliases"
-alias ls='ls --color=auto'
-alias ll='ls --color=auto -l'
+if [ "$uname" == "Darwin" ]; then
+	#alias ls='ls --color=auto' -- cannot use this with bsd/mac ls, use CLICOLOR instead
+	export CLICOLOR=1
+	alias ll='ls -l'
+	alias apache2ctl='sudo /opt/local/apache2/bin/apachectl'
+elif [ "$uname" == "Linux" ]; then
+	alias ls='ls --color=auto'
+	alias ll='ls --color=auto -l'
+else
+	echo >&2 "$0: Unknown OS encountered: $uname"
+fi
 alias grep='grep --color=auto'
 
 # bash-completion itself is sourced by the system.
 log_bashrc "Bash completion"
+if [ "$uname" == "Darwin" ]; then
+	if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
+	    source /opt/local/etc/profile.d/bash_completion.sh
+	fi
+fi
 for file in ~/etc/bash_completion.d/*; do
 	log_bashrc "Sourcing $file"
 	source $file
@@ -38,3 +58,4 @@ export PS1
 log_bashrc "Done"
 
 unset -f log_bashrc
+unset uname
