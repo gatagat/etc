@@ -48,7 +48,7 @@ if declare -f __git_ps1 > /dev/null; then # do we have __git_ps1?
 	log_bashrc "Setting fancy git-enabled PS1"
 	GIT_PS1_SHOWDIRTYSTATE=1
 	GIT_PS1_SHOWUNTRACKEDFILES=1
-	PS1="\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\$(__git_ps1 '[%s]') \$\[\033[00m\] "
+	PS1="\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\$(__git_ps1 '\[\033[01;33m\] %s\[\033[01;34m\]') \$\[\033[00m\] "
 else
 	log_bashrc "Setting fancy PS1"
 	PS1="\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\] "
