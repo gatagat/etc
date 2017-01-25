@@ -19,8 +19,8 @@ if [ -d '/biosw' ]; then # XXX: hackish test for IMP/IMBA cluster
     fi
 
     # Switch to EasyBuild modules
-    log_profile "Setup eb modules"
-    if [ -e /biosw/debian7-x86_64/easybuild/setup-eb.sh ]; then
+    if [ -e ~/.easybuild/enable ]; then
+	log_profile "Setup eb modules"
         #source /biosw/debian7-x86_64/easybuild/setup-eb.sh
         export EASYBUILD_MODULES_TOOL=Lmod
         export EASYBUILD_BUILDPATH=/tmp
@@ -45,8 +45,8 @@ if [ -d '/biosw' ]; then # XXX: hackish test for IMP/IMBA cluster
         module unuse /biosw/modules/modulefiles/msa
         module unuse /biosw/modules/modulefiles/multimedia /biosw/modules/modulefiles/ngs
         module unuse /biosw/modules/modulefiles/structure_md
+        log_profile "Setup eb modules done"
     fi
-    log_profile "Setup eb modules done"
 fi
 
 # Matlab should not clutter my HOME!
