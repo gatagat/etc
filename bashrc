@@ -17,17 +17,23 @@ alias ls='ls --color=auto'
 alias ll='ls --color=auto -l'
 alias grep='grep --color=auto'
 
-log_bashrc "Setting PS1"
-PS1="\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\] "
-
 # bash-completion itself is sourced by the system.
 log_bashrc "Bash completion"
-if [ -e /etc/bash_completion.d/git ]; then
-    source /etc/bash_completion.d/git
-fi
 for file in ~/etc/bash_completion.d/*; do
+	log_bashrc "Sourcing $file"
 	source $file
 done
+
+if declare -f __git_ps1 > /dev/null; then # do we have __git_ps1?
+	log_bashrc "Setting fancy git-enabled PS1"
+	GIT_PS1_SHOWDIRTYSTATE=1
+	GIT_PS1_SHOWUNTRACKEDFILES=1
+	PS1="\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\$(__git_ps1 '[%s]') \$\[\033[00m\] "
+else
+	log_bashrc "Setting fancy PS1"
+	PS1="\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\] "
+fi
+export PS1
 
 log_bashrc "Done"
 
