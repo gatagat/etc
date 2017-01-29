@@ -3,6 +3,7 @@ function log_profile ()
 	echo >&2 "$(date +%Y%m%d%H%M%S) [~/.profile]: $1"
 }
 
+uname=$(uname)
 log_profile "Start"
 if [ -d '/biosw' ]; then # XXX: hackish test for IMP/IMBA cluster
     # A predefined set of modules gets loaded in /etc/profile, correct it here.
@@ -59,10 +60,11 @@ if [ "$uname" == "Darwin" ]; then
 
     # Setting PATH for Python 2.7
     # The original version is saved in .profile.pysave
-    PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
+    PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH"
 fi
 export PATH
 
 log_profile "Done"
 
 unset -f log_profile
+unset uname
