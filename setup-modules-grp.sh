@@ -2,7 +2,7 @@ GRP=$1
 
 function log_setup_modules_grp_sh ()
 {
-	echo >&2 "$(date +%y%m%d%h%m%s) [~/etc/setup-modules-grp.sh $grp]: $1"
+	echo >&2 "$(date +%Y%m%d%H%M%S) [~/etc/setup-modules-grp.sh $GRP]: $1"
 }
 
 log_setup_modules_grp_sh "Looking for modules to unuse."
