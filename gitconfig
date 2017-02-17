@@ -1,0 +1,22 @@
+[user]
+	name = Tomas Kazmar
+	email = tomash.kazmar@seznam.cz
+[alias]
+	st = status
+	ci = commit
+	co = checkout
+	br = branch
+	lo = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	lp = log --graph --decorate --date=short --pretty=medium --abbrev-commit --all --patch
+[core]
+	excludesfile = /home/imp/kazmar/.gitignore
+	editor = vim
+[color]
+	status = auto
+	interactive = auto
+	diff = auto
+	branch = auto
+[merge]
+	tool = vimdiff
+[pull]
+	rebase = true
