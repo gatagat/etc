@@ -57,10 +57,10 @@ PATH=~/bin:$PATH
 if [ "$uname" == "Darwin" ]; then
     PATH="/opt/local/bin:/opt/local/sbin:$PATH"
     PATH="/Users/kazmar/node_modules/instant-markdown-d/:$PATH"
-
-    # Setting PATH for Python 2.7
-    # The original version is saved in .profile.pysave
+	# Required on the nbm-imp-55
     PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH"
+	export LC_ALL="en_US.UTF-8"
+	export LANG="en_US.UTF-8"
 fi
 export PATH
 

@@ -14,7 +14,6 @@ if [[ "$-" != *i* ]]; then
 fi
 
 if [ "$uname" == "Darwin" ]; then
-	export LC_CTYPE=en_US.UTF-8
 	export EDITOR=/opt/local/bin/vim
 fi
 
