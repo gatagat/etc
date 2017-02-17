@@ -9,7 +9,7 @@
 	lo = log --graph --decorate --pretty=oneline --abbrev-commit --all
 	lp = log --graph --decorate --date=short --pretty=medium --abbrev-commit --all --patch
 [core]
-	excludesfile = /home/imp/kazmar/.gitignore
+	excludesfile = ~/.gitignore
 	editor = vim
 [color]
 	status = auto
