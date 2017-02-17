@@ -1,4 +1,4 @@
-GRP=$1
+export GRP=$1
 
 function log_setup_modules_grp_sh ()
 {
