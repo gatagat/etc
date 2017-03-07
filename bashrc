@@ -35,7 +35,7 @@ alias grep='grep --color=auto'
 log_bashrc "Bash completion"
 if [ "$uname" == "Darwin" ]; then
 	if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
-	    source /opt/local/etc/profile.d/bash_completion.sh
+		source /opt/local/etc/profile.d/bash_completion.sh
 	fi
 fi
 for file in ~/etc/bash_completion.d/*; do
