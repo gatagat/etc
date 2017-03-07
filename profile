@@ -16,37 +16,6 @@ if [ -d '/biosw' ]; then # XXX: hackish test for IMP/IMBA cluster
         # XXX: unload as they are inactive when using eb
         module unload impimba-1
         module unload ogrt/0.3.0-2-g28daf5
-        log_profile "Module cleanup done"
-    fi
-
-    # Switch to EasyBuild modules
-    if [ -e ~/.easybuild/enable ]; then
-	log_profile "Setup eb modules"
-        #source /biosw/debian7-x86_64/easybuild/setup-eb.sh
-        export EASYBUILD_MODULES_TOOL=Lmod
-        export EASYBUILD_BUILDPATH=/tmp
-        export EASYBUILD_ROBOT_PATHS=/biosw/debian7-x86_64/easybuild/easybuild-easyconfigs
-        export EASYBUILD_IGNORE_OSDEPS=1
-        export EASYBUILD_PREFIX=/biosw/debian7-x86_64/easybuild/20160610
-
-        log_profile "modules.sh"
-        source /etc/profile.d/modules.sh
-        #export EASYBUILD_BUILDPATH=/dev/shm/$USER
-
-        log_profile "use"
-        module use /biosw/debian7-x86_64/easybuild/20160610/modules/all
-
-        log_profile "unuses"
-        module unuse /biosw/modules/modulefiles/biosw
-        module unuse /biosw/modules/modulefiles/devel
-        module unuse /biosw/modules/modulefiles/em
-        module unuse /biosw/modules/modulefiles/groups
-        module unuse /biosw/modules/modulefiles/hadoop
-        module unuse /biosw/modules/modulefiles/motif
-        module unuse /biosw/modules/modulefiles/msa
-        module unuse /biosw/modules/modulefiles/multimedia /biosw/modules/modulefiles/ngs
-        module unuse /biosw/modules/modulefiles/structure_md
-        log_profile "Setup eb modules done"
     fi
 fi
 

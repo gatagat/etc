@@ -12,8 +12,11 @@ ml load EasyBuild/3.1.0
 log_setup_eb_grp_sh "Setting up environment variables."
 #export PYTHONPATH=$PYTHONPATH:$HOME/eb-mns
 #export EASYBUILD_MODULE_NAMING_SCHEME=ExampleModuleNamingScheme
-export EASYBUILD_ROBOT_PATHS=~/eb:$EASYBUILD_ROBOT_PATHS
+export EASYBUILD_MODULES_TOOL=Lmod
+export EASYBUILD_BUILDPATH=/tmp
+export EASYBUILD_ROBOT_PATHS=~/eb:/biosw/debian7-x86_64/easybuild/easybuild-easyconfigs:$EASYBUILD_ROBOT_PATHS
 #export EASYBUILD_INCLUDE_EASYBLOCKS=~/eb-blocks
+export EASYBUILD_IGNORE_OSDEPS=1
 export EASYBUILD_PREFIX=/groups/$GRP/software/.easybuild/
 export EASYBUILD_INSTALLPATH_SOFTWARE=/groups/$GRP/software/
 export EASYBUILD_INSTALLPATH_MODULES=/groups/$GRP/software/modules/
