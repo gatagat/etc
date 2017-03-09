@@ -14,7 +14,7 @@ shopt -s histappend
 export HISTSIZE=1000000
 export HISTFILESIZE=1000000
 export HISTCONTROL=ignoredups:erasedups
-export PROMPT_COMMAND="history -a;history -c;history -r;$PROMPT_COMMAND"
+export PROMPT_COMMAND="history -a;history -c;history -r"
 
 log_bash_profile "Sourcing .bashrc"
 [ -e ~/.bashrc ] && source ~/.bashrc

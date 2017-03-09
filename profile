@@ -20,6 +20,7 @@ if [ -d '/biosw' ]; then # XXX: hackish test for IMP/IMBA cluster
 	if [ -e ~/.easybuild/enable ]; then
 		log_profile "Load basic modules"
 		module use /home/imp/kazmar/etc/modules
+		ml load screen/4.5.1
 		ml load git/2.8.0-GCC-4.9.3-2.25
 		ml load Python/2.7.11-foss-2016a
 		ml load Vim/8.0.069-foss-2016a-noX-Python-2.7
