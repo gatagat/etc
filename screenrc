@@ -1,4 +1,5 @@
 shell $SHELL
+term xterm-256color # system binaries have old ncurses-terminfo that does not support screen-256color
 startup_message off
 vbell off
 defscrollback 8000
