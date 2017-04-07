@@ -54,6 +54,38 @@ else
 fi
 export PS1
 
+log_bashrc "Setting up history and journaling"
+shopt -s checkwinsize
+shopt -s histappend
+export HISTSIZE=1000000
+export HISTFILESIZE=1000000
+export HISTFILE=$HOME/.bash_history
+export COMMAND_JOURNAL_FILE=$HOME/.command_journals/$(hostname).tsv
+log_bashrc "Journaling to $COMMAND_JOURNAL_FILE"
+mkdir -p $(dirname $COMMAND_JOURNAL_FILE) >/dev/null && true
+export HISTCONTROL=ignoredups:erasedups:ignorespace
+export HISTTIMEFORMAT="%Y%m%d%H%M%S "
+command_journal_append()
+{
+	local rv=$?
+	if [ "$rv" -ne 0 ]; then
+		return
+	fi
+	[[ $(history 1) =~ ^\ *[0-9]+\ +([0-9]+)\ +(.*)$ ]]
+	local date="${BASH_REMATCH[1]}"
+	local cmd="${BASH_REMATCH[2]}"
+	if [ "$cmd" != "$COMMAND_JOURNAL_LAST" ]
+	then
+		echo -e "$date\t$cmd" >> $COMMAND_JOURNAL_FILE
+		export COMMAND_JOURNAL_LAST="$cmd"
+	fi
+}
+# history -c = clear history in the current shell
+# history -w = overwrite history file
+# history -a = append to the history file
+# history -r = read the history file
+PROMPT_COMMAND="command_journal_append;history -a;$PROMPT_COMMAND"
+
 log_bashrc "Done"
 
 unset -f log_bashrc

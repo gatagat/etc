@@ -8,14 +8,6 @@ log_bash_profile "Start"
 log_bash_profile "Sourcing .profile"
 [ -e ~/.profile ] && source ~/.profile
 
-log_bash_profile "Bash stuff"
-shopt -s checkwinsize
-shopt -s histappend
-export HISTSIZE=1000000
-export HISTFILESIZE=1000000
-export HISTCONTROL=ignoredups:erasedups
-export PROMPT_COMMAND="history -a;history -c;history -r"
-
 log_bash_profile "Sourcing .bashrc"
 [ -e ~/.bashrc ] && source ~/.bashrc
 
