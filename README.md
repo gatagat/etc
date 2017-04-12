@@ -11,7 +11,6 @@ My dot files.
         ln -s ~/etc/profile ~/.profile
         ln -s ~/etc/bash_profile ~/.bash_profile
         ln -s ~/etc/bashrc ~/.bashrc
-        ln -s ~/etc/bashrc ~/.gitconfig
-        ln -s ~/etc/bashrc ~/.gitignore
-        ln -s ~/etc/bashrc ~/.screenrc
-        ln -s ~/etc/bashrc ~/.vimrc
+        ln -s ~/etc/gitconfig ~/.gitconfig
+        ln -s ~/etc/gitignore ~/.gitignore
+        ln -s ~/etc/screenrc ~/.screenrc
