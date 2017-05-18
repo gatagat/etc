@@ -1,9 +1,10 @@
 function log_profile ()
 {
-	echo >&2 "$(date +%Y%m%d%H%M%S) [~/.profile]: $1"
+	echo >&2 "`date +%Y%m%d%H%M%S` [~/.profile]: $1"
 }
 
-uname=$(uname)
+uname=`uname`
+hostname=`hostname`
 log_profile "Start"
 if [ -d '/biosw' ]; then # XXX: hackish test for IMP/IMBA cluster
 	# A predefined set of modules gets loaded in /etc/profile, correct it here.
@@ -15,9 +16,9 @@ if [ -d '/biosw' ]; then # XXX: hackish test for IMP/IMBA cluster
 		module unload term
 		# XXX: unload as they are inactive when using eb
 		module unload impimba-1
-		module unload ogrt/0.3.0-2-g28daf5
 	fi
-	if [ -e ~/.easybuild/enable ]; then
+	if [ "`echo $hostname | cut -f1-3 -d-`" == "impimba-1-login" -a \
+			-e ~/.easybuild/enable ]; then
 		log_profile "Load basic modules"
 		module use /home/imp/kazmar/etc/modules
 		ml load screen/4.5.1
