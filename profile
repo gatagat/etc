@@ -6,7 +6,12 @@ function log_profile ()
 uname=`uname`
 hostname=`hostname`
 log_profile "Start"
+
+# Matlab should not clutter my HOME!
+export MATLAB_LOG_DIR=/tmp
+
 if [ -d '/biosw' ]; then # XXX: hackish test for IMP/IMBA cluster
+	log_profile "System: IMPIMBA-1"
 	# A predefined set of modules gets loaded in /etc/profile, correct it here.
 	if [ "`type -t module`" == "function" ]; then
 		# Get rid of the weird stuff.
@@ -29,20 +34,20 @@ if [ -d '/biosw' ]; then # XXX: hackish test for IMP/IMBA cluster
 		ml load pyflakes/1.5.0-foss-2016a-Python-2.7.11
 		ml load universal-ctags/c27e1a5-foss-2016a
 	fi
-fi
-
-# Matlab should not clutter my HOME!
-export MATLAB_LOG_DIR=/tmp
-
-PATH=~/bin:$PATH
-if [ "$uname" == "Darwin" ]; then
+elif [ "$IMPIMBA_MACHINE_NAME" == "IMPIMBA-2" ]; then
+	log_profile "System: IMPIMBA-2"
+elif [ "$uname" == "Darwin" ]; then
+	log_profile "System: MacOSX"
 	PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 	PATH="/Users/kazmar/node_modules/instant-markdown-d/:$PATH"
 	# Required on the nbm-imp-55
 	PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH"
 	export LC_ALL="en_US.UTF-8"
 	export LANG="en_US.UTF-8"
+else
+	log_profile "System: unknown"
 fi
+PATH=~/bin:$PATH
 export PATH
 
 log_profile "Done"

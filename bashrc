@@ -57,6 +57,9 @@ export PS1
 log_bashrc "Setting up history and journaling"
 shopt -s checkwinsize
 shopt -s histappend
+shopt -s globstar 2> /dev/null # enables ** to recurse all directories
+bind "set completion-ignore-case on" # case-insensitive completion
+bind "set mark-symlinked-directories on" # add / to completed symlink directories
 export HISTSIZE=1000000
 export HISTFILESIZE=1000000
 export HISTFILE=$HOME/.bash_history
