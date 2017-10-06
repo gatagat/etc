@@ -10,7 +10,7 @@ log_profile "Start"
 # Matlab should not clutter my HOME!
 export MATLAB_LOG_DIR=/tmp
 
-if [ -d '/biosw' ]; then # XXX: hackish test for IMP/IMBA cluster
+if [ -d /biosw ]; then # XXX: hackish test for IMP/IMBA cluster
 	log_profile "System: IMPIMBA-1"
 	# A predefined set of modules gets loaded in /etc/profile, correct it here.
 	if [ "`type -t module`" == "function" ]; then
@@ -25,7 +25,7 @@ if [ -d '/biosw' ]; then # XXX: hackish test for IMP/IMBA cluster
 	if [ "`echo $hostname | cut -f1-3 -d-`" == "impimba-1-login" -a \
 			-e ~/.easybuild/enable ]; then
 		log_profile "Load basic modules"
-		module use /home/imp/kazmar/etc/modules
+		module use $HOME/etc/modules
 		ml load screen/4.5.1
 		ml load git/2.8.0-GCC-4.9.3-2.25
 		ml load Python/2.7.11-foss-2016a
@@ -36,6 +36,16 @@ if [ -d '/biosw' ]; then # XXX: hackish test for IMP/IMBA cluster
 	fi
 elif [ "$IMPIMBA_MACHINE_NAME" == "IMPIMBA-2" ]; then
 	log_profile "System: IMPIMBA-2"
+	if [ "`echo $hostname | cut -f1 -d-`" == "login" ]; then
+		log_profile "Load basic modules"
+		module use $HOME/etc/modules
+		ml load screen/4.5.1
+		ml load python/2.7.14-foss-2017a
+		ml load vim/8.0.586-foss-2017a-nox-python-2.7
+		ml load pycodestyle/2.3.1-foss-2017a-python-2.7.14
+		ml load pyflakes/1.6.0-foss-2017a-python-2.7.14
+		ml load universal-ctags/924c0ab-foss-2017a
+	fi
 elif [ "$uname" == "Darwin" ]; then
 	log_profile "System: MacOSX"
 	PATH="/opt/local/bin:/opt/local/sbin:$PATH"
