@@ -14,3 +14,4 @@ My dot files.
         ln -s ~/etc/gitconfig ~/.gitconfig
         ln -s ~/etc/gitignore ~/.gitignore
         ln -s ~/etc/screenrc ~/.screenrc
+        ln -s ~/etc/tmux.conf ~/.tmux.conf
