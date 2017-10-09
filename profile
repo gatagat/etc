@@ -26,7 +26,6 @@ if [ -d /biosw ]; then # XXX: hackish test for IMP/IMBA cluster
 			-e ~/.easybuild/enable ]; then
 		log_profile "Load basic modules"
 		module use $HOME/etc/modules
-		ml load screen/4.5.1
 		ml load git/2.8.0-GCC-4.9.3-2.25
 		ml load Python/2.7.11-foss-2016a
 		ml load Vim/8.0.069-foss-2016a-noX-Python-2.7
@@ -39,7 +38,6 @@ elif [ "$IMPIMBA_MACHINE_NAME" == "IMPIMBA-2" ]; then
 	if [ "`echo $hostname | cut -f1 -d-`" == "login" ]; then
 		log_profile "Load basic modules"
 		module use $HOME/etc/modules
-		ml load screen/4.5.1
 		ml load python/2.7.14-foss-2017a
 		ml load vim/8.0.586-foss-2017a-nox-python-2.7
 		ml load pycodestyle/2.3.1-foss-2017a-python-2.7.14
