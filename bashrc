@@ -43,14 +43,15 @@ for file in ~/etc/bash_completion.d/*; do
 	source $file
 done
 
+# for i in {0..255}; do     printf "\x1b[38;5;${i}mcolour${i}\x1b[0m\n"; done
 if declare -f __git_ps1 > /dev/null; then # do we have __git_ps1?
 	log_bashrc "Setting fancy git-enabled PS1"
 	GIT_PS1_SHOWDIRTYSTATE=1
 	GIT_PS1_SHOWUNTRACKEDFILES=1
-	PS1="\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\$(__git_ps1 '\[\033[01;33m\] %s\[\033[01;34m\]' 2>/dev/null) \$\[\033[00m\] "
+	PS1="\[\033[38;5;28m\]\u@\h\[\033[38;5;20m\] \w\$(__git_ps1 '\[\033[38;5;220m\] %s\[\033[38;5;20m\]' 2>/dev/null) \$\[\033[00m\] "
 else
 	log_bashrc "Setting fancy PS1"
-	PS1="\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\] "
+	PS1="\[\033[38;5;28m\]\u@\h\[\033[38;5;20m\] \w \$\[\033[00m\] "
 fi
 export PS1
 
