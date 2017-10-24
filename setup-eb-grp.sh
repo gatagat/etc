@@ -21,11 +21,11 @@ if [ -d /biosw ]; then
 	export EASYBUILD_INSTALLPATH_SOFTWARE=/groups/$GRP/software/
 	export EASYBUILD_INSTALLPATH_MODULES=/groups/$GRP/software/modules/
 elif [ "$IMPIMBA_MACHINE_NAME" == "IMPIMBA-2" ]; then
-	EB_EDITION=170828
+	EB_EDITION=171020
 	if [ "$EASYBUILD_PREFIX" != "/software/$EB_EDITION" ]; then
 		echo >&2 "Expected eb module tree at /software/$EB_EDITION. Quitting."
 	else
-		ml load EasyBuild/3.3.1
+		ml load easybuild/3.4.1
 		log_setup_eb_grp_sh "Setting up environment variables."
 		export EASYBUILD_BUILDPATH=/tmp
 		export EASYBUILD_PREFIX=/groups/$GRP/software/$EB_EDITION-ii2/

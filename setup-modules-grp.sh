@@ -16,7 +16,7 @@ if [ -d /biosw ]; then
 	log_setup_modules_grp_sh "module use /groups/$GRP/software/modules/all"
 	module use /groups/$GRP/software/modules/all
 elif [ "$IMPIMBA_MACHINE_NAME" == "IMPIMBA-2" ]; then
-	EB_EDITION=170828
+	EB_EDITION=171020
 	log_setup_modules_grp_sh " module use /groups/$GRP/software/$EB_EDITION-ii2/modules/all"
 	module use "/groups/$GRP/software/$EB_EDITION-ii2/modules/all"
 else

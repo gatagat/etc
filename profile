@@ -37,11 +37,12 @@ elif [ "$IMPIMBA_MACHINE_NAME" == "IMPIMBA-2" ]; then
 	log_profile "System: IMPIMBA-2"
 	if [ "`echo $hostname | cut -f1 -d-`" == "login" ]; then
 		log_profile "Load basic modules"
+		ml load build-env/171020
 		module use $HOME/etc/modules
-		ml load python/2.7.14-foss-2017a
+		ml load python/2.7.13-foss-2017a
 		ml load vim/8.0.586-foss-2017a-nox-python-2.7
-		ml load pycodestyle/2.3.1-foss-2017a-python-2.7.14
-		ml load pyflakes/1.6.0-foss-2017a-python-2.7.14
+		ml load pycodestyle/2.3.1-foss-2017a-python-2.7.13
+		ml load pyflakes/1.6.0-foss-2017a-python-2.7.13
 		ml load universal-ctags/924c0ab-foss-2017a
 	fi
 elif [ "$uname" == "Darwin" ]; then
