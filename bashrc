@@ -30,6 +30,7 @@ else
 	echo >&2 "$0: Unknown OS encountered: $uname"
 fi
 alias grep='grep --color=auto'
+export LS_COLORS='pi=7:so=7:bd=7:cd=7:di=0;94:fi=0:ex=0;32:ln=0;94:mi=0;31'
 
 # bash-completion itself is sourced by the system.
 log_bashrc "Bash completion"
