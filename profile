@@ -55,6 +55,10 @@ elif [ "$uname" == "Darwin" ]; then
 	PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH"
 	export LC_ALL="en_US.UTF-8"
 	export LANG="en_US.UTF-8"
+	# CUDA
+	export CUDA_HOME=/usr/local/cuda
+	export DYLD_LIBRARY_PATH=$CUDA_HOME/lib:$DYLD_LIBRARY_PATH
+	export PATH=$CUDA_HOME/bin:$PATH
 else
 	log_profile "System: unknown"
 fi
