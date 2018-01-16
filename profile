@@ -35,8 +35,8 @@ if [ -d /biosw ]; then # XXX: hackish test for IMP/IMBA cluster
 	fi
 elif [ "$IMPIMBA_MACHINE_NAME" == "IMPIMBA-2" ]; then
 	log_profile "System: IMPIMBA-2"
-	#export LMOD_TRACING=yes
-	export LMOD_CACHED_LOADS=yes
+	export LMOD_TRACING=no #yes
+	export LMOD_CACHED_LOADS=no
 	if [ "`echo $hostname | cut -f1 -d-`" == "login" ]; then
 		log_profile "Load basic modules"
 		ml load build-env/171020
