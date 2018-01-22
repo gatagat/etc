@@ -33,7 +33,12 @@ elif [ "$IMPIMBA_MACHINE_NAME" == "IMPIMBA-2" ]; then
 		export EASYBUILD_BUILDPATH=/tmp
 		export EASYBUILD_PREFIX=/groups/$GRP/software/$EB_EDITION-ii2/
 		export EASYBUILD_GROUP_WRITABLE_INSTALLDIR=${GRP}.GRP
-		newgrp ${GRP}.GRP
+		# XXX: Cannot use newgrp because of the sticky:
+		#     -rwsr-xr-x 1 root root 41776 Nov  5  2016 /usr/bin/newgrp
+		# which causes the LD_LIBRARY_PATH to be reset. Alternative
+		# is to set the installation root setgid:
+		#    chmod g+s $EASYBUILD_PREFIX 
+		#newgrp ${GRP}.GRP
 	fi
 	unset EB_EDITION
 else
