@@ -29,7 +29,7 @@ elif [ "$IMPIMBA_MACHINE_NAME" == "IMPIMBA-2" ]; then
 		ml load easybuild/3.4.1
 		module use "/groups/$GRP/software/$EB_EDITION-ii2/modules/all"
 		log_setup_eb_grp_sh "Setting up environment variables."
-		export EASYBUILD_ROBOT_PATHS=/software/$EB_EDITION/ebfiles_repo/:/groups/pauli/kazmar/projs/eb/ii2/easybuild/easyconfigs
+		export EASYBUILD_ROBOT_PATHS=/software/$EB_EDITION/ebfiles_repo/:/groups/pauli/kazmar/projs/eb/impimba-easybuild-easyconfigs
 		export EASYBUILD_BUILDPATH=/tmp
 		export EASYBUILD_PREFIX=/groups/$GRP/software/$EB_EDITION-ii2/
 		export EASYBUILD_GROUP_WRITABLE_INSTALLDIR=${GRP}.GRP
