@@ -3,15 +3,15 @@ function log_bashrc ()
 	echo >&2 "$(date +%Y%m%d%H%M%S) [~/.bashrc]: $1"
 }
 
-log_bashrc "Start"
 uname=$(uname)
 
 # Please do shut up if non-interactive, also if `ssh host /bin/true`, or
 # `git clone`, ...
 if [[ "$-" != *i* ]]; then
-	log_bashrc "Non-interactive session, quitting"
+	#log_bashrc "Non-interactive session, quitting"
 	return
 fi
+log_bashrc "Start"
 
 if [ "$uname" == "Darwin" ]; then
 	export EDITOR=/opt/local/bin/vim
