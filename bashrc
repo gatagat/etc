@@ -29,12 +29,12 @@ elif [ "$uname" == "Linux" ]; then
 	if [ ! -z `which sbatch` ]; then
 		export SLURM_TIME_FORMAT="%y.%m.%d-%H:%M:%S"
 		export SQUEUE_FORMAT=
-		alias sq='squeue -o "%10i %.6Q %.13j %.10u %.2t %.10M %.4P %.3q %.17S %.10l %.2D %.2C %12R %b" -S "-p,t,j"'
-		alias sqr='sq -t R'
-		alias squ='sq -u $USER'
-		alias sqru='sq -u $USER -t R'
-		alias squr=sqru
-		alias sr='sreport cluster AccountUtilizationByUser'
+		alias sqa='squeue -o "%10i %.6Q %.13j %.10u %.2t %.10M %.4P %.3q %.17S %.10l %.2D %.2C %12R %b" -S "-p,t,j"'
+		alias sqar='sq -t R'
+		alias sq='sq -u $USER'
+		alias sqr='sq -u $USER -t R'
+		alias sra='sreport cluster AccountUtilizationByUser'
+		alias sr='sra | grep --color=never $USER'
 		alias sa='sacct --format="Start,User%7,JobID%-7,JobName%14,ExitCode%5,Timelimit,Elapsed,ReqMem%5,MaxRss,MaxDiskRead,MaxDiskWrite,AllocCPUS%3"'
 		alias sqos='sacctmgr list qos format=name,prio,grptres%30,maxtres%30,maxwall'
 		alias sjobinfo='sacct -o jobid,account,user%15,submit,start,end,elapsed,exitcode,reqtres%40,nodelist,ntasks,state%20,timelimit,submit -j'
