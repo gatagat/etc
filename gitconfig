@@ -8,9 +8,11 @@
 	br = branch
 	lo = log --graph --decorate --pretty=oneline --abbrev-commit --all
 	lp = log --graph --decorate --date=short --pretty=medium --abbrev-commit --all --patch
+	sh = show --stat --oneline
 [core]
 	excludesfile = ~/.gitignore
 	editor = vim
+	filemode = true
 [color]
 	status = auto
 	interactive = auto
