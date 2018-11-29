@@ -28,8 +28,8 @@ elif [ "$uname" == "Linux" ]; then
 	alias ll='ls --color=auto -l'
 	if [ ! -z `which sbatch` ]; then
 		export SLURM_TIME_FORMAT="%y.%m.%d-%H:%M:%S"
-		export SQUEUE_FORMAT=
-		alias sqa='squeue -o "%10i %.6Q %.13j %.10u %.2t %.10M %.4P %.3q %.17S %.10l %.2D %.2C %4m %12R %b" -S "-p,t,j"'
+		export SQUEUE_FORMAT="%%10i %.6Q %.13j %.10u %.2t %.10M %.4P %.3q %.17S %.10l %.2D %.2C %4m %12R %b"
+		alias sqa='squeue -S "-p,t,j"'
 		alias sqar='sqa -t R'
 		alias sq='sqa -u $USER'
 		alias sqr='sqa -u $USER -t R'
