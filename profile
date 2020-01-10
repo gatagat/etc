@@ -1,6 +1,11 @@
 function log_profile ()
 {
-	echo >&2 "`date +%Y%m%d%H%M%S` [~/.profile]: $1"
+	if [ "$(hostname)" == "labe" -o "$(hostname)" == "donau" -o "$(hostname)" == "odra" ]; then
+		true # On ubuntu any messages printed from .profile trigger an annoying
+		     # error message box.
+	else
+		echo >&2 "`date +%Y%m%d%H%M%S` [~/.profile]: $1"
+	fi
 }
 
 uname=`uname`
@@ -63,6 +68,11 @@ elif [ "$uname" == "Darwin" ]; then
 	export CUDA_HOME=/usr/local/cuda
 	export DYLD_LIBRARY_PATH=$CUDA_HOME/lib:$DYLD_LIBRARY_PATH
 	export PATH=$CUDA_HOME/bin:$PATH
+elif [ "$hostname" == "labe" ]; then
+	log_profile "System: labe"
+	#stty -ixon
+	export PATH=/opt/rclone:$PATH
+	export PATH=/opt/StorageExplorer-linux-x64:$PATH
 else
 	log_profile "System: unknown"
 fi
