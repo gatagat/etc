@@ -40,6 +40,9 @@ elif [ "$uname" == "Linux" ]; then
 		alias sjobinfo='sacct -o jobid,account,user%15,submit,start,end,elapsed,exitcode,reqtres%40,nodelist,ntasks,state%20,timelimit,submit -j'
 		# scontrol update jobid=$1 QOS=short
 	fi
+
+	export WORKON_HOME="$HOME/.virtualenvs"
+	source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 else
 	echo >&2 "$0: Unknown OS encountered: $uname"
 fi
