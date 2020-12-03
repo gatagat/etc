@@ -29,6 +29,8 @@ if [ "$uname" == "Darwin" ]; then
 	export PATH=$CUDA_HOME/bin:$PATH
 	export PATH="/Library/Frameworks/Python.framework/Versions/3.7/bin:${PATH}"
 	export PATH="/Users/kazmar/projs/flutter/bin:$PATH"
+	export PATH="$HOME/.jenv/bin:$PATH"
+	eval "`jenv init -`"
 elif [ "$uname" == "Linux" ]; then
 	log_profile "System: labe"
 	#stty -ixon
