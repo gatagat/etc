@@ -1,6 +1,6 @@
 function log_profile ()
 {
-	if [ "$(hostname)" == "labe" -o "$(hostname)" == "donau" -o "$(hostname)" == "odra" ]; then
+	if [ "$(hostname)" == "labe" -o "$(hostname)" == "donau" -o "$(hostname)" == "odra" -o "$(hostname)" == "schwarza" -o "$(hostname)" == "wulka" -o "$(hostname)" == "rhein" ]; then
 		true # On ubuntu any messages printed from .profile trigger an annoying
 		     # error message box.
 	else
@@ -31,11 +31,6 @@ if [ "$uname" == "Darwin" ]; then
 	export PATH="/Users/kazmar/projs/flutter/bin:$PATH"
 	export PATH="$HOME/.jenv/bin:$PATH"
 	eval "`jenv init -`"
-elif [ "$uname" == "Linux" ]; then
-	log_profile "System: labe"
-	#stty -ixon
-	#export PATH=/opt/rclone:$PATH
-	#export PATH=/opt/StorageExplorer-linux-x64:$PATH
 else
 	log_profile "System: unknown"
 fi
