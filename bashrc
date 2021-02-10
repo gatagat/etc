@@ -18,11 +18,13 @@ if [ "$uname" == "Darwin" ]; then
 fi
 
 log_bashrc "Setting aliases"
+export WORKON_HOME="$HOME/.virtualenvs"
 if [ "$uname" == "Darwin" ]; then
 	#alias ls='ls --color=auto' -- cannot use this with bsd/mac ls, use CLICOLOR instead
 	export CLICOLOR=1
 	alias ll='ls -l'
 	alias apache2ctl='sudo /opt/local/apache2/bin/apachectl'
+	source /opt/local/bin/virtualenvwrapper.sh-3.8
 elif [ "$uname" == "Linux" ]; then
 	alias ls='ls --color=auto'
 	alias ll='ls --color=auto -l'
@@ -41,7 +43,6 @@ elif [ "$uname" == "Linux" ]; then
 		# scontrol update jobid=$1 QOS=short
 	fi
 
-	export WORKON_HOME="$HOME/.virtualenvs"
 	source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 else
 	echo >&2 "$0: Unknown OS encountered: $uname"
