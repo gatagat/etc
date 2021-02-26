@@ -1,6 +1,6 @@
 function log_bash_profile ()
 {
-	echo >&2 "$(date +%Y%m%d%H%M%S) [~/.bash_profile]: $1"
+	echo "$(date +%Y%m%d%H%M%S) [~/.bash_profile]: $1"
 }
 
 log_bash_profile "Start"

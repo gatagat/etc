@@ -1,6 +1,6 @@
 function log_bashrc ()
 {
-	echo >&2 "$(date +%Y%m%d%H%M%S) [~/.bashrc]: $1"
+	echo "$(date +%Y%m%d%H%M%S) [~/.bashrc]: $1"
 }
 
 uname=$(uname)

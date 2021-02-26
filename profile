@@ -1,11 +1,6 @@
 function log_profile ()
 {
-	if [ "$(hostname)" == "labe" -o "$(hostname)" == "donau" -o "$(hostname)" == "odra" -o "$(hostname)" == "schwarza" -o "$(hostname)" == "wulka" -o "$(hostname)" == "rhein" ]; then
-		true # On ubuntu any messages printed from .profile trigger an annoying
-		     # error message box.
-	else
-		echo >&2 "`date +%Y%m%d%H%M%S` [~/.profile]: $1"
-	fi
+	echo "$(date +%Y%m%d%H%M%S) [~/.profile]: $1"
 }
 
 uname=`uname`
