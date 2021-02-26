@@ -13,7 +13,6 @@ My dot files.
         ln -s ~/etc/bashrc ~/.bashrc
         ln -s ~/etc/gitconfig ~/.gitconfig
         ln -s ~/etc/gitignore ~/.gitignore
-        ln -s ~/etc/screenrc ~/.screenrc
         ln -s ~/etc/tmux.conf ~/.tmux.conf
         mkdir ~/.pip
         ln -s ~/etc/pip.conf ~/.pip/
