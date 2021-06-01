@@ -132,6 +132,10 @@ if [ -e "$HOME/.cargo/env" ]; then
 	source "$HOME/.cargo/env"
 fi
 
+if [ -f "/opt/conda/etc/profile.d/conda.sh" ]; then
+. "/opt/conda/etc/profile.d/conda.sh"
+fi
+
 log_bashrc "Done"
 
 unset -f log_bashrc
