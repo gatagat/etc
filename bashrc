@@ -128,6 +128,10 @@ if [ -d "$HOME/.nvm" ]; then
 	[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 fi
 
+if [ -e "$HOME/.cargo/env" ]; then
+	source "$HOME/.cargo/env"
+fi
+
 log_bashrc "Done"
 
 unset -f log_bashrc
