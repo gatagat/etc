@@ -29,7 +29,8 @@ if [ "$uname" == "Darwin" ]; then
 else
 	log_profile "System: unknown"
 fi
-PATH=~/bin:$PATH
+[ -d ~/bin ] && PATH=~/bin:$PATH
+[ -d ~/.local/bin ] && PATH=~/.local/bin:$PATH
 export PATH
 
 log_profile "Done"
