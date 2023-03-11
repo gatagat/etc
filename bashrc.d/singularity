@@ -1,0 +1,1 @@
+export SINGULARITYENV_PS1="[\$SINGULARITY_NAME] \w $ "
