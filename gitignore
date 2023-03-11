@@ -5,3 +5,9 @@
 *.pyc
 tags
 .ipynb_checkpoints
+.ycm_extra_conf.py
+*.egg-info
+__pycache__
+.venv
+.vscode
+.eggs
