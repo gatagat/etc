@@ -80,10 +80,10 @@ if declare -f __git_ps1 > /dev/null; then # do we have __git_ps1?
 	#     git config bash.showDirtyState false
 	# for GIT_PS1_SHOWDIRTYSTATE
 	#GIT_PS1_SHOWUNTRACKEDFILES=1
-	PS1="\[\033[38;5;28m\]\u@\h\[\033[38;5;20m\] \w\$(__git_ps1 '\[\033[38;5;220m\] %s\[\033[38;5;20m\]' 2>/dev/null) \$\[\033[00m\] "
+	PS1="\[\033[38;5;28m\]\u@\h\[\033[38;5;12m\] \w\$(__git_ps1 '\[\033[38;5;220m\] %s\[\033[38;5;12m\]' 2>/dev/null) \$\[\033[m\] "
 else
 	log_bashrc "Setting fancy PS1"
-	PS1="\[\033[38;5;28m\]\u@\h\[\033[38;5;20m\] \w \$\[\033[00m\] "
+	PS1="\[\033[38;5;28m\]\u@\h\[\033[38;5;12m\] \w \$\[\033[m\] "
 fi
 export PS1
 
