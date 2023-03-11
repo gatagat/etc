@@ -86,6 +86,7 @@ else
 	PS1="\[\033[38;5;28m\]\u@\h\[\033[38;5;12m\] \w \$\[\033[m\] "
 fi
 export PS1
+export SINGULARITYENV_PS1="[\$SINGULARITY_NAME] \w $ "
 
 log_bashrc "Setting up history and journaling"
 shopt -s checkwinsize
