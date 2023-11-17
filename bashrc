@@ -124,6 +124,8 @@ command_journal_append()
 # history -r = read the history file
 PROMPT_COMMAND="command_journal_append;history -a;$PROMPT_COMMAND"
 
+export CUDA_DEVICE_ORDER=PCI_BUS_ID
+
 if [ -d "$HOME/.nvm" ]; then
 	export NVM_DIR="$HOME/.nvm"
 	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
