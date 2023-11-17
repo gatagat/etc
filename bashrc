@@ -31,6 +31,7 @@ elif [ "$uname" == "Linux" ]; then
 	if [ ! -z `which sbatch` ]; then
 		export SLURM_TIME_FORMAT="%y.%m.%d-%H:%M:%S"
 		export SQUEUE_FORMAT="%%5i %.6Q %.12j %.8u %.2t %.10M %.4P %.17S %.10l %.2D %.3C %4m %16R %b"
+		export SQUEUE_SORT=P,i  # sort by partition name, job id
 		alias sqa='squeue -S "-p,t,j"'
 		alias sqar='sqa -t R'
 		alias sq='sqa -u $USER'
