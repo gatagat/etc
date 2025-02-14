@@ -14,16 +14,10 @@ function log_bashrc
 log_bashrc "Start"
 
 uname=$(uname)
-if [ "$uname" != "Darwin" -a "$uname" != "Linux" ]; then
-	echo >&2 "$0: Unknown OS encountered: $uname"
+if [ "$uname" != "Linux" ]; then
+	log_profile "System $uname is not setup"
 fi
 
-if [ "$uname" == "Darwin" ]; then
-	log_bashrc "Bash completion on Darwin"
-	if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
-		source /opt/local/etc/profile.d/bash_completion.sh
-	fi
-fi
 log_bashrc "Sourcing local bash completion scripts"
 for file in ~/etc/bash_completion.d/*; do
 	source $file
