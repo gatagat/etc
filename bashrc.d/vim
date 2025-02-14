@@ -1,0 +1,7 @@
+VIM_BINARY=$(which vim)
+if [ ! -z "$VIM_BINARY" ]; then
+	export VISUAL="$VIM_BINARY"
+	export EDITOR="$VISUAL"
+fi
+unset VIM_BINARY
+

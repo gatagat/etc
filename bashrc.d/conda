@@ -1,0 +1,3 @@
+if [ -f "/opt/conda/etc/profile.d/conda.sh" ]; then
+. "/opt/conda/etc/profile.d/conda.sh"
+fi

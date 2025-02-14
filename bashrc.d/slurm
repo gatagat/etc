@@ -1,0 +1,16 @@
+SBATCH_BINARY="`which sbatch`"
+if [ ! -z "$SBATCH_BINARY" ]; then
+	export SLURM_TIME_FORMAT="%y.%m.%d-%H:%M:%S"
+	export SQUEUE_FORMAT="%%5i %.6Q %.12j %.8u %.2t %.10M %.4P %.17S %.10l %.2D %.3C %4m %16R %b"
+	alias sqa='squeue -S "-p,t,j"'
+	alias sqar='sqa -t R'
+	alias sq='sqa -u $USER'
+	alias sqr='sqa -u $USER -t R'
+	alias sra='sreport cluster AccountUtilizationByUser'
+	alias sr='sra | grep --color=never $USER'
+	alias sa='sacct --format="Start,User%7,JobID%-7,JobName%14,ExitCode%5,Timelimit,Elapsed,ReqMem%5,MaxRss,MaxDiskRead,MaxDiskWrite,AllocCPUS%3"'
+	alias sqos='sacctmgr list qos format=name,prio,grptres%30,maxtres%30,maxwall'
+	alias sjobinfo='sacct -o jobid,account,user%15,submit,start,end,elapsed,exitcode,reqtres%40,nodelist,ntasks,state%20,timelimit,submit -j'
+	# scontrol update jobid=$1 QOS=short
+fi
+unset SBATCH_BINARY
