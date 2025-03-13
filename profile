@@ -13,9 +13,9 @@ fi
 [ -d ~/.local/bin ] && PATH=~/.local/bin:$PATH
 export PATH
 
-log_profile "Done"
+[ -e "$HOME/.rye/env" ] && source "$HOME/.rye/env"
 
-source "$HOME/.rye/env"
+log_profile "Done"
 
 unset -f log_profile
 unset uname
