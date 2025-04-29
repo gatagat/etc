@@ -3,10 +3,6 @@
 	email = tomash.kazmar@seznam.cz
 [includeIf "gitdir:~/humai/"]
 	path = ~/humai/.gitconfig
-[includeIf "gitdir:/export/"]
-	path = ~/humai/.gitconfig
-[includeIf "gitdir:/opt/synctool"]
-	path = ~/humai/.gitconfig
 [alias]
 	st = status
 	ci = commit
