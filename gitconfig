@@ -1,8 +1,8 @@
 [user]
 	name = Tomas Kazmar
 	email = tomash.kazmar@seznam.cz
-[includeIf "gitdir:~/humai/"]
-	path = ~/humai/.gitconfig
+[includeIf "gitdir:~/mimica/"]
+	path = ~/mimica/.gitconfig
 [alias]
 	st = status
 	ci = commit
@@ -11,6 +11,10 @@
 	lo = log --graph --decorate --pretty=oneline --abbrev-commit --all
 	lp = log --graph --decorate --date=short --pretty=medium --abbrev-commit --all --patch
 	sh = show --stat --oneline
+    wt = wortree
+	wta = "!f() { git worktree add -b \"$1\" \"../$1\"; }; f"
+	wtr = "!f() { git worktree remove \"$1\"; }; f"
+	wtl = "!f() { git worktree list; }; f"
 [core]
 	excludesfile = ~/.gitignore
 	editor = vim

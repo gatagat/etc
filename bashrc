@@ -14,8 +14,8 @@ function log_bashrc
 log_bashrc "Start"
 
 uname=$(uname)
-if [ "$uname" != "Linux" ]; then
-	log_profile "System $uname is not setup"
+if [ "$uname" != "Linux" -a "$uname" != "Darwin" ]; then
+	log_bashr "System $uname is not setup"
 fi
 
 log_bashrc "Sourcing local bash completion scripts"

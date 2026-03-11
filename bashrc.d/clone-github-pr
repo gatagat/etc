@@ -1,0 +1,64 @@
+# cpr - create a git worktree for a pull request
+# Usage: cpr <PR_NUMBER> [<REMOTE>]
+# Example: cpr 1234 origin
+# If no remote is specified, it defaults to 'origin'.
+# Note: This command fetches the branch associated with the PR and creates a worktree
+# at the repo root level, named after the branch.
+# Ensure you have the GitHub CLI installed and authenticated with `gh auth login`.
+clone-github-pr() {
+  if [[ -z "$1" || "$1" == "-h" || "$1" == "--help" ]]; then
+    echo "Usage: cpr <PR_NUMBER> [<REMOTE>]"
+    echo "  PR_NUMBER  GitHub pull request number"
+    echo "  REMOTE     Git remote name (default: origin)"
+    echo "Example: cpr 1234"
+    echo "Example: cpr 1234 upstream"
+    return 0
+  fi
+
+  local pr="$1"
+  local remote="${2:-origin}"
+
+  if ! [[ "$pr" =~ ^[0-9]+$ ]]; then
+    echo "Error: PR_NUMBER must be a positive integer, got: '$pr'" >&2
+    return 1
+  fi
+
+  local repo_root
+  repo_root=$(git rev-parse --show-toplevel 2>/dev/null) || {
+    echo "Error: not inside a git repository" >&2
+    return 1
+  }
+
+  local branch
+  branch=$(gh pr view "$pr" --json headRefName -q .headRefName 2>/dev/null) || {
+    echo "Error: could not retrieve PR #$pr (check the PR number and gh authentication)" >&2
+    return 1
+  }
+
+  if [[ -z "$branch" ]]; then
+    echo "Error: PR #$pr returned an empty branch name" >&2
+    return 1
+  fi
+
+  local worktree_path="${repo_root}/../${branch}"
+
+  if [[ -e "$worktree_path" ]]; then
+    echo "Error: path already exists: $worktree_path" >&2
+    return 1
+  fi
+
+  git fetch "$remote" "$branch" || {
+    echo "Error: failed to fetch '$branch' from remote '$remote'" >&2
+    return 1
+  }
+
+  git worktree add --track -b "$branch" "$worktree_path" "$remote/$branch" || {
+    echo "Error: failed to create worktree at $worktree_path" >&2
+    return 1
+  }
+
+  cd "$worktree_path" || return 1
+  echo "Switched to new worktree for PR #$pr: $branch"
+  echo "Path: $worktree_path"
+}
+alias cpr=clone-github-pr

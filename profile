@@ -6,7 +6,10 @@ function log_profile
 log_profile "Start"
 
 uname=`uname`
-if [ "$uname" != "Linux" ]; then
+if [ "$uname" == "Linux" ]; then
+elif [ "$uname" == "Darwin" ]; then
+	export BASH_SILENCE_DEPRECATION_WARNING=1
+else
 	log_profile "System $uname is not setup"
 fi
 [ -d ~/bin ] && PATH=~/bin:$PATH
