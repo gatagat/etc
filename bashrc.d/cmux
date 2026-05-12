@@ -1,0 +1,46 @@
+# Patch cmux shell integration to fix Ctrl+Z / job control breakage.
+#
+# cmux integration loads after .bashrc (Ghostty injection), so
+# _cmux_prompt_command is not yet defined here. We install a self-removing
+# one-shot patcher into PROMPT_COMMAND that applies the fix on the first
+# prompt, after cmux has had a chance to load.
+#
+# Root cause: _cmux_prompt_command spawns async background processes which
+# create a SIGCHLD race with bash's stopped-job bookkeeping on Ctrl+Z,
+# producing: bash: warning: deleting stopped job <N>
+#
+# Fix: skip _cmux_prompt_command when stopped jobs are present.
+# Trade-off: cmux sidebar won't refresh while jobs are stopped.
+
+original_log_script="$LOG_SCRIPT"
+LOG_SCRIPT=~/etc/bashrc.d/cmux
+log_bashrc "Scheduling cmux jobctl patch"
+
+_cmux_jobctl_patch() {
+    # Wait until cmux integration has loaded
+    declare -f _cmux_prompt_command >/dev/null 2>&1 || return 0
+    # Patch once, then self-remove from PROMPT_COMMAND
+    if ! declare -f _cmux_prompt_command__orig >/dev/null 2>&1; then
+        eval "_cmux_prompt_command__orig() $(declare -f _cmux_prompt_command | tail -n +2)"
+        # Call __prompt_command directly from the wrapper so PS1 stays current
+        # even if PROMPT_COMMAND is later reset to only _cmux_prompt_command.
+        _cmux_prompt_command() {
+            declare -f __prompt_command >/dev/null 2>&1 && __prompt_command
+            [[ -n "$(jobs -s 2>/dev/null)" ]] && return 0
+            _cmux_prompt_command__orig "$@"
+        }
+    fi
+    # Remove self and standalone __prompt_command from PROMPT_COMMAND;
+    # __prompt_command is now embedded in _cmux_prompt_command above.
+    PROMPT_COMMAND="${PROMPT_COMMAND//;_cmux_jobctl_patch/}"
+    PROMPT_COMMAND="${PROMPT_COMMAND//_cmux_jobctl_patch;/}"
+    PROMPT_COMMAND="${PROMPT_COMMAND//_cmux_jobctl_patch/}"
+    PROMPT_COMMAND="${PROMPT_COMMAND//;__prompt_command/}"
+    PROMPT_COMMAND="${PROMPT_COMMAND//__prompt_command;/}"
+    PROMPT_COMMAND="${PROMPT_COMMAND//__prompt_command/}"
+    unset -f _cmux_jobctl_patch
+}
+
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND;}_cmux_jobctl_patch"
+LOG_SCRIPT=$original_log_script
+unset original_log_script

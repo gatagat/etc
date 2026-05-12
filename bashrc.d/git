@@ -1,15 +1,32 @@
 # for i in {0..255}; do     printf "\x1b[38;5;${i}mcolour${i}\x1b[0m\n"; done
-if declare -f __git_ps1 > /dev/null; then # do we have __git_ps1?
-	log_bashrc "Setting fancy git-enabled PS1"
-	GIT_PS1_SHOWDIRTYSTATE=1
-	# This way too slow on big repos and there is no way to suppress the check per repo like with:
-	#     git config --global bash.showDirtyState true
-	#     git config bash.showDirtyState false
-	# for GIT_PS1_SHOWDIRTYSTATE
-	#GIT_PS1_SHOWUNTRACKEDFILES=1
-	PS1="\[\033[38;5;28m\]\u@\h\[\033[38;5;12m\] \w\$(__git_ps1 '\[\033[38;5;220m\] %s\[\033[38;5;12m\]' 2>/dev/null) \$\[\033[m\] "
+if declare -f __git_ps1 > /dev/null; then
+    log_bashrc "Setting fancy git-enabled PS1"
+    GIT_PS1_SHOWDIRTYSTATE=1
+    GIT_PS1_STATESEPARATOR=
+    # GIT_PS1_SHOWDIRTYSTATE is slow on big repos; suppress per-repo with:
+    #     git config bash.showDirtyState false
+    # GIT_PS1_SHOWUNTRACKEDFILES=1
+
+    __prompt_command() {
+        local GREEN="\[\e[38;5;28m\]"
+        local BLUE="\[\e[38;5;12m\]"
+        local RESET="\[\e[0m\]"
+        # The format arg goes through printf inside __git_ps1, which interprets \e
+        # as ESC. Use raw SOH/ESC/STX bytes so they survive printf unchanged.
+        local YELLOW_FMT=$'\001\e[38;5;220m\002'
+        local BLUE_FMT=$'\001\e[38;5;12m\002'
+        # Disable promptvars to force ps1_expanded=no in __git_ps1, so branch
+        # name and dirty state are embedded directly in PS1 on each call rather
+        # than via ${__git_ps1_branch_name} indirection which causes stale markers.
+        shopt -u promptvars
+        __git_ps1 \
+            "${GREEN}\u@\h${BLUE} \w" \
+            " \$${RESET} " \
+            "${YELLOW_FMT} %s${BLUE_FMT}"
+        shopt -s promptvars
+    }
+    PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND;}__prompt_command"
 else
-	log_bashrc "Setting fancy PS1"
-	PS1="\[\033[38;5;28m\]\u@\h\[\033[38;5;12m\] \w \$\[\033[m\] "
+    log_bashrc "Setting fancy PS1"
+    PS1="\[\033[38;5;28m\]\u@\h\[\033[38;5;12m\] \w \$\[\033[m\] "
 fi
-export PS1
