@@ -14,3 +14,7 @@ log_bash_profile "Sourcing .bashrc"
 log_bash_profile "Done"
 
 unset -f log_bash_profile
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
